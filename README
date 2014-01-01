@@ -1,0 +1,11 @@
+Phone game base code
+=====================================================================
+
+This project is a base-code/boilerplate style project that will allow
+you to bootstrap a game quickly.
+
+SFML-2.1 is included in the source tree and if these libraries aren't
+installed on the system, they'll need to be included on your libpath
+before attempting execution:
+
+export LD_LIBRARY_PATH=game/libs/SFML-2.1/lib

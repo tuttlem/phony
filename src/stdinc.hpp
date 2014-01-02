@@ -6,7 +6,10 @@
 #include <memory>
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <map>
+#include <regex>
 
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>

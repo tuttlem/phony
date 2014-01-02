@@ -1,8 +1,6 @@
 Items left todo
 =====================================================================
 
-Prmitives
-
 Asset management
    Texture
    Sound/Music
@@ -18,4 +16,3 @@ Animation system
 Include boost library
 Include a physics library
 
-Perform an electric fence check to ensure allocates/deallocates occur

@@ -27,7 +27,6 @@ class blank_state : public game_state {
          glLightfv(GL_LIGHT1, GL_POSITION, lightPosition);
          glEnable(GL_LIGHT1);
 
-
          angle = 0.0f;
 
          return true;

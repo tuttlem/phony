@@ -4,15 +4,13 @@
 namespace phony {
 
    void game::run(std::shared_ptr<game_state> initialState) {
+
       // manages the current game time
       sf::Clock clock;
       sf::Clock fpsClock;
 
       this->_stateManager.setState(initialState);
       this->_running = true;
-
-      this->_window->setVerticalSyncEnabled(true);
-      this->_window->setFramerateLimit(60);
 
       while (this->_running && this->_stateManager.running()) {
          sf::Event event;
@@ -78,6 +76,7 @@ namespace phony {
       );
 
       this->_window->setVerticalSyncEnabled(true);
+      this->_window->setFramerateLimit(60);
 
       return true;
    }

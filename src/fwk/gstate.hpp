@@ -56,7 +56,7 @@ namespace phony {
    }
 
    inline std::shared_ptr<game_state> game_state::next(void) {
-      return NULL;
+      return nullptr;
    }
 
    inline void game_state::handleEvent(sf::Event event) {

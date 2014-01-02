@@ -14,6 +14,7 @@
 #include <glm/glm.hpp>
 
 #include "fwk/gstate.hpp"
+#include "fwk/estate.hpp"
 #include "fwk/stmgr.hpp"
 #include "fwk/game.hpp"
 

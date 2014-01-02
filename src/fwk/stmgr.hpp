@@ -5,12 +5,16 @@
 
 namespace phony {
 
+   class error_state;
+
    class state_manager {
       public:
          state_manager(void);
          virtual ~state_manager(void);
 
          void setState(std::shared_ptr<game_state> state);
+         void setErrorState(const std::string &message);
+
          void update(const sf::Time &elapsed);
          void render(void);
          void raiseEvent(const sf::Event &event);
@@ -35,13 +39,19 @@ namespace phony {
    inline state_manager::~state_manager(void) {
    }
 
+   inline void state_manager::setErrorState(const std::string &message) {
+      this->_currentState = std::shared_ptr<game_state>(new error_state(message));
+   }
+
    inline void state_manager::setState(std::shared_ptr<game_state> state) {
 
       std::shared_ptr<game_state> old = this->_currentState;
 
       // if we already have a state to set, tear it down
       if (this->_currentState != nullptr) {
-         this->_currentState->teardown();
+         if (!this->_currentState->teardown()) {
+            this->setErrorState("Failed to teardown game state");
+         }
       }
 
       // change the state over
@@ -49,7 +59,9 @@ namespace phony {
 
       // if we have a valid state, init it
       if (this->_currentState != nullptr) {
-         this->_currentState->init();
+         if (!this->_currentState->init()) {
+            this->setErrorState("Failed to initialize game state");
+         }
       }
 
    }

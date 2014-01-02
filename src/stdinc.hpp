@@ -3,6 +3,12 @@
 
 #define __phony_stdinc_hpp_
 
+extern "C" {
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+}
+
 #include <memory>
 #include <cmath>
 #include <iostream>

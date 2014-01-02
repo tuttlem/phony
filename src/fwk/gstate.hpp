@@ -26,7 +26,7 @@ namespace phony {
          virtual void mouseReleased(const sf::Event::MouseButtonEvent &button);
          virtual void resize(const sf::Event::SizeEvent &size);
 
-         virtual game_state* next(void);
+         virtual std::shared_ptr<game_state> next(void);
 
       protected:
          static void resize2D(const sf::Event::SizeEvent &event);
@@ -55,7 +55,7 @@ namespace phony {
       return true;
    }
 
-   inline game_state* game_state::next(void) {
+   inline std::shared_ptr<game_state> game_state::next(void) {
       return NULL;
    }
 

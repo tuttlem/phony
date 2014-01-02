@@ -3,7 +3,7 @@
 CC := g++
 SRCDIR := src
 BUILDDIR := build
-CFLAGS := -g -Wall -Ilibs/SFML-2.1/include
+CFLAGS := -g -std=c++11 -Wall -Ilibs/SFML-2.1/include
 TARGET := bin/phony
 LFLAGS := -Llibs/SFML-2.1/lib -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU
 

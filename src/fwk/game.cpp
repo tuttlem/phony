@@ -3,7 +3,7 @@
 
 namespace phony {
 
-   void game::run(game_state *initialState) {
+   void game::run(std::shared_ptr<game_state> initialState) {
       // manages the current game time
       sf::Clock clock;
       sf::Clock fpsClock;

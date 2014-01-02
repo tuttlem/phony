@@ -3,8 +3,8 @@
 
 #define __phony_stdinc_hpp_
 
-#include <math.h>
-
+#include <memory>
+#include <cmath>
 #include <iostream>
 #include <string>
 

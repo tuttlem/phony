@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
    phony::game g;
 
    g.init(640, 480, "Phony");
-   g.run(new blank_state());
+   g.run(std::shared_ptr<game_state>(new blank_state()));
    g.teardown();
 
    return 0;

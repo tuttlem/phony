@@ -12,7 +12,7 @@ namespace phony {
          virtual ~game(void);
 
          const bool init(const int width, const int height, const std::string &title);
-         void run(game_state *initialState);
+         void run(std::shared_ptr<game_state> initialState);
          const bool teardown(void);
 
          void setupFor2D(void);

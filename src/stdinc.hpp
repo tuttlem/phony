@@ -21,5 +21,6 @@
 #include "util/camera.hpp"
 #include "util/perlin.hpp"
 #include "util/lscape.hpp"
+#include "util/prim.hpp"
 
 #endif //__phony_stdinc_hpp_

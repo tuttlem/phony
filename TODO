@@ -1,0 +1,21 @@
+Items left todo
+=====================================================================
+
+Prmitives
+
+Asset management
+   Texture
+   Sound/Music
+   Models
+   Maps
+   INI
+
+Sprite system
+Animation system
+
+2D tile game helpers
+
+Include boost library
+Include a physics library
+
+Perform an electric fence check to ensure allocates/deallocates occur

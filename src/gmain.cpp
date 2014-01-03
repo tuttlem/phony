@@ -26,8 +26,12 @@ class blank_state : public game_state {
          glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
          glLightfv(GL_LIGHT1, GL_POSITION, lightPosition);
          glEnable(GL_LIGHT1);
+         glEnable(GL_TEXTURE_2D);
 
          angle = 0.0f;
+
+         bmp f = bmp::fromFile("data/swirl.bmp");
+         textureId = f.makeTexture();
 
          return true;
       }
@@ -37,11 +41,13 @@ class blank_state : public game_state {
 
          glMatrixMode(GL_MODELVIEW);
 
+         glBindTexture(GL_TEXTURE_2D, textureId);
+
          glLoadIdentity();
          glTranslatef(0.0f, 0.0f, -6.0f);
          glRotatef(angle, 1.0f, 1.0f, 1.0f);
          glBegin(GL_QUADS);
-            primitive::cube(1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
+            primitive::cube(1.0f);
          glEnd();
 
          glLoadIdentity();
@@ -49,7 +55,7 @@ class blank_state : public game_state {
          glRotatef(angle, 1.0f, 1.0f, 1.0f);
          glTranslatef(0.0f, 0.0f, -2.0f);
          glBegin(GL_QUADS);
-            primitive::cube(1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
+            primitive::cube(1.0f);
          glEnd();
 
          return true;
@@ -72,6 +78,7 @@ class blank_state : public game_state {
    private:
       bool keypressed;
       float angle;
+      GLuint textureId;
 };
 
 int main(int argc, char *argv[]) {

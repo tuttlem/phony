@@ -35,5 +35,6 @@ extern "C" {
 #include "util/perlin.hpp"
 #include "util/lscape.hpp"
 #include "util/prim.hpp"
+#include "util/bmp.hpp"
 
 #endif //__phony_stdinc_hpp_

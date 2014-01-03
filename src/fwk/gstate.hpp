@@ -24,13 +24,13 @@ namespace phony {
          virtual void mouseMoved(const sf::Event::MouseMoveEvent &mouse);
          virtual void mousePressed(const sf::Event::MouseButtonEvent &button);
          virtual void mouseReleased(const sf::Event::MouseButtonEvent &button);
-         virtual void resize(const sf::Event::SizeEvent &size);
+         virtual void resize(const int height, const int width);
 
          virtual std::shared_ptr<game_state> next(void);
 
       protected:
-         static void resize2D(const sf::Event::SizeEvent &event);
-         static void resize3D(const sf::Event::SizeEvent &event, const float fovy = 45.0f, const float zNear = 0.1f, const float zFar = 1000.0f);
+         static void resize2D(const int width, const int height);
+         static void resize3D(const int width, const int height, const float fovy = 45.0f, const float zNear = 0.1f, const float zFar = 1000.0f);
    };
 
    inline game_state::game_state(void) {
@@ -77,7 +77,7 @@ namespace phony {
    inline void game_state::mouseReleased(const sf::Event::MouseButtonEvent &button) {
    }
 
-   inline void game_state::resize(const sf::Event::SizeEvent &size) {
+   inline void game_state::resize(const int width, const int height) {
    }
 }
 

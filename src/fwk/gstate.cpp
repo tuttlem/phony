@@ -3,12 +3,12 @@
 
 namespace phony {
 
-   void game_state::resize2D(const sf::Event::SizeEvent &event) {
+   void game_state::resize2D(const int width, const int height) {
 
       // setup the projection matrix
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
-      glOrtho(0, event.width, event.height, 0, -1, 1);
+      glOrtho(0, width, height, 0, -1, 1);
 
       // reset the model view matrix
       glMatrixMode(GL_MODELVIEW);
@@ -16,13 +16,13 @@ namespace phony {
 
    }
 
-   void game_state::resize3D(const sf::Event::SizeEvent &event, const float fovy, const float zNear, const float zFar) {
+   void game_state::resize3D(const int width, const int height, const float fovy, const float zNear, const float zFar) {
 
       // setup the projection matrix
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
-      glViewport(0, 0, event.width, event.height);
-      gluPerspective(fovy, (float)event.width/(float)event.height, zNear, zFar);
+      glViewport(0, 0, width, height);
+      gluPerspective(fovy, (float)width/(float)height, zNear, zFar);
 
       // reset the model view matrix
       glMatrixMode(GL_MODELVIEW);

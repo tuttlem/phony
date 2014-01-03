@@ -18,6 +18,10 @@ namespace phony {
          void setupFor2D(void);
          void setupFor3D(void);
 
+         const int width(void) const    { return _width; }
+         const int height(void) const   { return _height; }
+         const bool running(void) const { return _running; }
+
       private:
          const bool setupVideo(void);
          void setFramerate(const int fps);

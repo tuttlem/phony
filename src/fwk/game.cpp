@@ -26,7 +26,7 @@ namespace phony {
                   this->_width = event.size.width;
                   this->_height = event.size.height;
 
-                  this->_stateManager.resize(event);
+                  this->_stateManager.resize(event.size.width, event.size.height);
                   break;
 
                case sf::Event::KeyPressed:
@@ -59,7 +59,7 @@ namespace phony {
          // get the current elapsed time
          sf::Time elapsed = clock.restart();
 
-         this->_stateManager.update(elapsed);
+         this->_stateManager.update(elapsed, this->_width, this->_height);
          this->_stateManager.render();
 
          this->_window->display();

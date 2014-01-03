@@ -15,7 +15,7 @@ namespace phony {
          void setState(std::shared_ptr<game_state> state);
          void setErrorState(const std::string &message);
 
-         void update(const sf::Time &elapsed);
+         void update(const sf::Time &elapsed, const int width, const int height);
          void render(void);
          void raiseEvent(const sf::Event &event);
 
@@ -26,7 +26,7 @@ namespace phony {
          void mouseMoved(const sf::Event &event);
          void mousePressed(const sf::Event &event);
          void mouseReleased(const sf::Event &event);
-         void resize(const sf::Event &event);
+         void resize(const int width, const int height);
 
       private:
          std::shared_ptr<game_state> _currentState;
@@ -66,7 +66,7 @@ namespace phony {
 
    }
 
-   inline void state_manager::update(const sf::Time &elapsed) {
+   inline void state_manager::update(const sf::Time &elapsed, const int width, const int height) {
 
       // make sure we have a state to work with
       if (this->_currentState != nullptr) {
@@ -77,6 +77,9 @@ namespace phony {
             // false, out the back-end of update means that
             // we're ready to move onto the next state
             this->setState(this->_currentState->next());
+
+            // start all state changes with a resize event
+            this->resize(width, height);
 
          } else {
 
@@ -136,9 +139,9 @@ namespace phony {
       }
    }
 
-   inline void state_manager::resize(const sf::Event &event) {
+   inline void state_manager::resize(const int width, const int height) {
       if (this->_currentState != nullptr) {
-         this->_currentState->resize(event.size);
+         this->_currentState->resize(width, height);
       }
    }
 }

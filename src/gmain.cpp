@@ -65,8 +65,8 @@ class blank_state : public game_state {
          keypressed = true;
       }
 
-      void resize(const sf::Event::SizeEvent &size) {
-         game_state::resize3D(size);
+      void resize(const int width, const int height) {
+         game_state::resize3D(width, height);
       }
 
    private:

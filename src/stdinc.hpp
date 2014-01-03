@@ -15,7 +15,9 @@ extern "C" {
 #include <fstream>
 #include <string>
 #include <map>
-#include <regex>
+#include <future>
+#include <algorithm>
+#include <chrono>
 
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
@@ -23,6 +25,7 @@ extern "C" {
 #include <glm/glm.hpp>
 
 #include "fwk/gstate.hpp"
+#include "fwk/gstatea.hpp"
 #include "fwk/estate.hpp"
 #include "fwk/stmgr.hpp"
 #include "fwk/game.hpp"

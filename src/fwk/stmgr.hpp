@@ -40,7 +40,7 @@ namespace phony {
    }
 
    inline void state_manager::setErrorState(const std::string &message) {
-      this->_currentState = std::shared_ptr<game_state>(new error_state(message));
+      this->_currentState = std::make_shared<error_state>(message);
    }
 
    inline void state_manager::setState(std::shared_ptr<game_state> state) {

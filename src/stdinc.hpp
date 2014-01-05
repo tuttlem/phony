@@ -9,6 +9,7 @@ extern "C" {
 #include <lauxlib.h>
 }
 
+#include <cstring>
 #include <memory>
 #include <cmath>
 #include <iostream>
@@ -29,6 +30,7 @@ extern "C" {
 #include "fwk/estate.hpp"
 #include "fwk/stmgr.hpp"
 #include "fwk/game.hpp"
+#include "fwk/tmgr.hpp"
 
 #include "util/tweener.hpp"
 #include "util/camera.hpp"
@@ -36,5 +38,6 @@ extern "C" {
 #include "util/lscape.hpp"
 #include "util/prim.hpp"
 #include "util/bmp.hpp"
+#include "util/tga.hpp"
 
 #endif //__phony_stdinc_hpp_

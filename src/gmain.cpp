@@ -30,8 +30,7 @@ class blank_state : public game_state {
 
          angle = 0.0f;
 
-         bmp f = bmp::fromFile("data/swirl.bmp");
-         textureId = f.makeTexture();
+         texture_manager::instance()->loadTGA("test", "data/test.tga");
 
          return true;
       }
@@ -41,7 +40,7 @@ class blank_state : public game_state {
 
          glMatrixMode(GL_MODELVIEW);
 
-         glBindTexture(GL_TEXTURE_2D, textureId);
+         texture_manager::instance()->use("test");
 
          glLoadIdentity();
          glTranslatef(0.0f, 0.0f, -6.0f);

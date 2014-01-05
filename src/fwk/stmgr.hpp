@@ -49,8 +49,12 @@ namespace phony {
 
       // if we already have a state to set, tear it down
       if (this->_currentState != nullptr) {
-         if (!this->_currentState->teardown()) {
-            this->setErrorState("Failed to teardown game state");
+         try {
+            if (!this->_currentState->teardown()) {
+               this->setErrorState("Failed to teardown game state");
+            }
+         } catch (std::exception &e) {
+            this->setErrorState("Teardown failed: " + std::string(e.what()));
          }
       }
 
@@ -59,8 +63,12 @@ namespace phony {
 
       // if we have a valid state, init it
       if (this->_currentState != nullptr) {
-         if (!this->_currentState->init()) {
-            this->setErrorState("Failed to initialize game state");
+         try {
+            if (!this->_currentState->init()) {
+               this->setErrorState("Failed to initialize game state");
+            }
+         } catch (std::exception &e) {
+            this->setErrorState("Init failed: " + std::string(e.what()));
          }
       }
 

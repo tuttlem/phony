@@ -30,9 +30,11 @@ namespace phony {
          int         _width, _height;
          std::string _title;
 
-         sf::Window  *_window;
-
          state_manager _stateManager;
+
+         SDL_Window     *_window;
+         //SDL_Renderer   *_renderer;
+         SDL_GLContext   _glContext;
    };
 
 
@@ -41,27 +43,6 @@ namespace phony {
 
    inline game::~game(void) {
       this->teardown();
-   }
-
-   inline const bool game::init(const int width, const int height, const std::string &title) {
-      this->_width = width;
-      this->_height = height;
-      this->_title = title;
-
-      this->_window = NULL;
-
-      return this->setupVideo();
-   }
-
-   inline const bool game::teardown(void) {
-
-      // if we have a built window, destroy it
-      if (this->_window != NULL) {
-         delete this->_window;
-         this->_window = NULL;
-      }
-
-      return true;
    }
 
 }

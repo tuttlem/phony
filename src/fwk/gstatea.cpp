@@ -25,7 +25,7 @@ namespace phony {
       return true;
    }
 
-   const bool game_state_async::update(const sf::Time &elapsed) {
+   const bool game_state_async::update(const unsigned int elapsed) {
       return this->updater.wait_for(std::chrono::seconds(0)) != std::future_status::ready;
    }
 

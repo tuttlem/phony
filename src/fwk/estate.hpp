@@ -9,7 +9,7 @@ namespace phony {
       public:
          error_state(const std::string &message);
 
-         virtual const bool update(const sf::Time &elapsed);
+         virtual const bool update(const unsigned int elapsed);
          virtual const bool render(void);
 
       private:

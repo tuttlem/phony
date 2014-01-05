@@ -32,7 +32,7 @@ namespace phony {
          bool           _repeat, _finished;
 
          T              _start, _end;
-         sf::Clock      _clock;
+         timer          _clock;
          unsigned int   _prog, _ticks;
    };
 
@@ -132,8 +132,7 @@ namespace phony {
       }
 
       // accumulate split timing
-      sf::Time elapsed = _clock.restart();
-      _prog += elapsed.asMilliseconds();
+      _prog += _clock.elapsed();
 
       // need to handle boundaries if we're repeating
       if (_repeat) {

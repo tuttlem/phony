@@ -12,7 +12,7 @@ namespace phony {
          virtual const bool init(void);
          virtual const bool teardown(void);
 
-         const bool update(const sf::Time &elapsed);
+         const bool update(const unsigned int elapsed);
 
          virtual bool updateInternal(void) = 0;
 

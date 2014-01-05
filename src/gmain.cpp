@@ -60,17 +60,18 @@ class blank_state : public game_state {
          return true;
       }
 
-      const bool update(const sf::Time &elapsed) {
-         float perc = elapsed.asMilliseconds() / 1000.0f;
+      const bool update(const unsigned int elapsed) {
+         float perc = elapsed / 1000.0f;
          angle += (perc * 10.0f) * (2.0f * 3.14159f);
          return !keypressed;
       }
 
-      void keyPressed(const sf::Event::KeyEvent &key) {
+      void keyPressed(const SDL_Event &key) {
          keypressed = true;
       }
 
       void resize(const int width, const int height) {
+         std::cout << "resized to " << width << ", " << height << std::endl;
          game_state::resize3D(width, height);
       }
 

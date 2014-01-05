@@ -7,6 +7,11 @@ extern "C" {
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
+
+#include <SDL.h>
+
+#include <GL/gl.h>
+#include <GL/glu.h>
 }
 
 #include <cstring>
@@ -19,9 +24,7 @@ extern "C" {
 #include <future>
 #include <algorithm>
 #include <chrono>
-
-#include <SFML/Window.hpp>
-#include <SFML/OpenGL.hpp>
+#include <exception>
 
 #include <glm/glm.hpp>
 
@@ -32,6 +35,7 @@ extern "C" {
 #include "fwk/game.hpp"
 #include "fwk/tmgr.hpp"
 
+#include "util/timer.hpp"
 #include "util/tweener.hpp"
 #include "util/camera.hpp"
 #include "util/perlin.hpp"

@@ -15,17 +15,17 @@ namespace phony {
          void setState(std::shared_ptr<game_state> state);
          void setErrorState(const std::string &message);
 
-         void update(const sf::Time &elapsed, const int width, const int height);
+         void update(const unsigned int elapsed, const int width, const int height);
          void render(void);
-         void raiseEvent(const sf::Event &event);
+         void raiseEvent(const SDL_Event &event);
 
          const bool running(void) const { return this->_currentState != nullptr; }
 
-         void keyPressed(const sf::Event &event);
-         void keyReleased(const sf::Event &event);
-         void mouseMoved(const sf::Event &event);
-         void mousePressed(const sf::Event &event);
-         void mouseReleased(const sf::Event &event);
+         void keyPressed(const SDL_Event &event);
+         void keyReleased(const SDL_Event &event);
+         void mouseMoved(const SDL_Event &event);
+         void mousePressed(const SDL_Event &event);
+         void mouseReleased(const SDL_Event &event);
          void resize(const int width, const int height);
 
       private:
@@ -74,7 +74,7 @@ namespace phony {
 
    }
 
-   inline void state_manager::update(const sf::Time &elapsed, const int width, const int height) {
+   inline void state_manager::update(const unsigned int elapsed, const int width, const int height) {
 
       // make sure we have a state to work with
       if (this->_currentState != nullptr) {
@@ -108,7 +108,7 @@ namespace phony {
       }
    }
 
-   inline void state_manager::raiseEvent(const sf::Event &event) {
+   inline void state_manager::raiseEvent(const SDL_Event &event) {
 
       // make sure we have a state to work with
       if (this->_currentState != nullptr) {
@@ -117,33 +117,33 @@ namespace phony {
 
    }
 
-   inline void state_manager::keyPressed(const sf::Event &event) {
+   inline void state_manager::keyPressed(const SDL_Event &event) {
       if (this->_currentState != nullptr) {
-         this->_currentState->keyPressed(event.key);
+         this->_currentState->keyPressed(event);
       }
    }
 
-   inline void state_manager::keyReleased(const sf::Event &event) {
+   inline void state_manager::keyReleased(const SDL_Event &event) {
       if (this->_currentState != nullptr) {
-         this->_currentState->keyReleased(event.key);
+         this->_currentState->keyReleased(event);
       }
    }
 
-   inline void state_manager::mouseMoved(const sf::Event &event) {
+   inline void state_manager::mouseMoved(const SDL_Event &event) {
       if (this->_currentState != nullptr) {
-         this->_currentState->mouseMoved(event.mouseMove);
+         this->_currentState->mouseMoved(event);
       }
    }
 
-   inline void state_manager::mousePressed(const sf::Event &event) {
+   inline void state_manager::mousePressed(const SDL_Event &event) {
       if (this->_currentState != nullptr) {
-         this->_currentState->mousePressed(event.mouseButton);
+         this->_currentState->mousePressed(event);
       }
    }
 
-   inline void state_manager::mouseReleased(const sf::Event &event) {
+   inline void state_manager::mouseReleased(const SDL_Event &event) {
       if (this->_currentState != nullptr) {
-         this->_currentState->mouseReleased(event.mouseButton);
+         this->_currentState->mouseReleased(event);
       }
    }
 

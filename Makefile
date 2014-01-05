@@ -3,9 +3,9 @@
 CC := g++
 SRCDIR := src
 BUILDDIR := build
-CFLAGS := -g -std=c++11 -Wall -Ilibs/SFML-2.1/include -Ilibs/lua-5.2.1/include
+CFLAGS := -g -std=c++11 -Wall -Ilibs/lua-5.2.1/include `pkg-config --cflags sdl2`
 TARGET := bin/phony
-LFLAGS := -Llibs/lua-5.2.1/lib/lliblua52.a -Llibs/SFML-2.1/lib -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lpthread
+LFLAGS := -Llibs/lua-5.2.1/lib/lliblua52.a `pkg-config --libs sdl2` -lGL -lGLU -lpthread
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))

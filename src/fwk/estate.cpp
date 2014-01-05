@@ -6,7 +6,7 @@ namespace phony {
    error_state::error_state(const std::string &message) : _message(message) {
    }
 
-   const bool error_state::update(const sf::Time &elapsed) {
+   const bool error_state::update(const unsigned int elapsed) {
       std::cerr << this->_message << std::endl;
       return false;
    }

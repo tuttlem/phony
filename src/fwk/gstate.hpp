@@ -14,16 +14,16 @@ namespace phony {
          virtual const bool init(void);
          virtual const bool teardown(void);
 
-         virtual const bool update(const sf::Time &elapsed);
+         virtual const bool update(const unsigned int elapsed);
          virtual const bool render(void);
 
-         virtual void handleEvent(sf::Event event);
+         virtual void handleEvent(SDL_Event event);
 
-         virtual void keyPressed(const sf::Event::KeyEvent &key);
-         virtual void keyReleased(const sf::Event::KeyEvent &key);
-         virtual void mouseMoved(const sf::Event::MouseMoveEvent &mouse);
-         virtual void mousePressed(const sf::Event::MouseButtonEvent &button);
-         virtual void mouseReleased(const sf::Event::MouseButtonEvent &button);
+         virtual void keyPressed(const SDL_Event &key);
+         virtual void keyReleased(const SDL_Event &key);
+         virtual void mouseMoved(const SDL_Event &mouse);
+         virtual void mousePressed(const SDL_Event &button);
+         virtual void mouseReleased(const SDL_Event &button);
          virtual void resize(const int height, const int width);
 
          virtual std::shared_ptr<game_state> next(void);
@@ -47,7 +47,7 @@ namespace phony {
       return true;
    }
 
-   inline const bool game_state::update(const sf::Time &elapsed) {
+   inline const bool game_state::update(const unsigned int elapsed) {
       return true;
    }
 
@@ -59,22 +59,22 @@ namespace phony {
       return nullptr;
    }
 
-   inline void game_state::handleEvent(sf::Event event) {
+   inline void game_state::handleEvent(SDL_Event event) {
    }
 
-   inline void game_state::keyPressed(const sf::Event::KeyEvent &key) {
+   inline void game_state::keyPressed(const SDL_Event &key) {
    }
 
-   inline void game_state::keyReleased(const sf::Event::KeyEvent &key) {
+   inline void game_state::keyReleased(const SDL_Event &key) {
    }
 
-   inline void game_state::mouseMoved(const sf::Event::MouseMoveEvent &mouse) {
+   inline void game_state::mouseMoved(const SDL_Event &mouse) {
    }
 
-   inline void game_state::mousePressed(const sf::Event::MouseButtonEvent &button) {
+   inline void game_state::mousePressed(const SDL_Event &button) {
    }
 
-   inline void game_state::mouseReleased(const sf::Event::MouseButtonEvent &button) {
+   inline void game_state::mouseReleased(const SDL_Event &button) {
    }
 
    inline void game_state::resize(const int width, const int height) {

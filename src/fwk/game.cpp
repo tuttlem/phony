@@ -6,46 +6,54 @@ namespace phony {
    void game::run(std::shared_ptr<game_state> initialState) {
 
       // manages the current game time
-      sf::Clock clock;
-      sf::Clock fpsClock;
+      timer gameTimer;
 
       this->_stateManager.setState(initialState);
+      this->_stateManager.resize(this->_width, this->_height);
+
       this->_running = true;
 
       while (this->_running && this->_stateManager.running()) {
-         sf::Event event;
 
-         while (this->_window->pollEvent(event)) {
+         SDL_Event event;
+
+         while (SDL_PollEvent(&event)) {
 
             switch (event.type) {
-               case sf::Event::Closed:
+               case SDL_QUIT:
                   this->_running = false;
                   break;
 
-               case sf::Event::Resized:
-                  this->_width = event.size.width;
-                  this->_height = event.size.height;
+               case SDL_WINDOWEVENT:
 
-                  this->_stateManager.resize(event.size.width, event.size.height);
+                  switch (event.window.event) {
+                     case SDL_WINDOWEVENT_RESIZED:
+                        this->_width = event.window.data1;
+                        this->_height = event.window.data2;
+
+                        this->_stateManager.resize(this->_width, this->_height);
+                        break;
+                  }
+
                   break;
 
-               case sf::Event::KeyPressed:
+               case SDL_KEYDOWN:
                   this->_stateManager.keyPressed(event);
                   break;
 
-               case sf::Event::KeyReleased:
+               case SDL_KEYUP:
                   this->_stateManager.keyReleased(event);
                   break;
 
-               case sf::Event::MouseMoved:
+               case SDL_MOUSEMOTION:
                   this->_stateManager.mouseMoved(event);
                   break;
 
-               case sf::Event::MouseButtonPressed:
+               case SDL_MOUSEBUTTONDOWN:
                   this->_stateManager.mousePressed(event);
                   break;
 
-               case sf::Event::MouseButtonReleased:
+               case SDL_MOUSEBUTTONUP:
                   this->_stateManager.mouseReleased(event);
                   break;
 
@@ -56,27 +64,89 @@ namespace phony {
 
          }
 
-         // get the current elapsed time
-         sf::Time elapsed = clock.restart();
+         // update logic for the state
+         this->_stateManager.update(
+            gameTimer.elapsed(),
+            this->_width,
+            this->_height
+         );
 
-         this->_stateManager.update(elapsed, this->_width, this->_height);
+         // render this state to screen
          this->_stateManager.render();
 
-         this->_window->display();
+         // flip the back buffer
+         SDL_GL_SwapWindow(this->_window);
       }
    }
 
+   const bool game::init(const int width, const int height, const std::string &title) {
+      this->_width = width;
+      this->_height = height;
+      this->_title = title;
+
+      this->_window = nullptr;
+      this->_glContext = nullptr;
+      //this->_renderer = nullptr;
+
+      if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
+         throw std::runtime_error(SDL_GetError());
+      }
+
+      return this->setupVideo();
+   }
+
+   const bool game::teardown(void) {
+      /*
+      if (this->_renderer != nullptr) {
+         SDL_DestroyRenderer(this->_renderer);
+         this->_renderer = NULL;
+      }
+      */
+      if (this->_window != nullptr) {
+         SDL_DestroyWindow(this->_window);
+         this->_window = nullptr;
+      }
+
+      SDL_Quit();
+
+      return true;
+   }
+
    const bool game::setupVideo(void) {
-      // create the game window
-      this->_window = new sf::Window(
-         sf::VideoMode(this->_width, this->_height),
+
+      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+
+      this->_window = SDL_CreateWindow(
          this->_title.c_str(),
-         sf::Style::Default,
-         sf::ContextSettings(32)
+         100, 100,
+         this->_width, this->_height,
+         SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN
       );
 
-      this->_window->setVerticalSyncEnabled(true);
-      this->_window->setFramerateLimit(60);
+      if (this->_window == nullptr) {
+         throw std::runtime_error(SDL_GetError());
+      }
+
+      this->_glContext = SDL_GL_CreateContext(this->_window);
+
+      if (this->_glContext == nullptr) {
+         throw std::runtime_error(SDL_GetError());
+      }
+
+      // use v-sync
+      SDL_GL_SetSwapInterval(1);
+
+      /*
+      this->_renderer = SDL_CreateRenderer(
+         this->_window, -1,
+         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+      );
+
+      if (this->_renderer == nullptr) {
+         throw std::runtime_error(SDL_GetError());
+      }
+      */
 
       return true;
    }

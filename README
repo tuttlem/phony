@@ -6,15 +6,6 @@ you to bootstrap a game quickly.
 
 Dependencies:
 
-   SFML-2.1 (provided in the source tree)
    lua-5.2.1 (provided in the source tree)
+   libsdl2-dev
 
-   libgl1-mesa-dev
-   libglu1-mesa-dev
-   libglm-dev
-
-SFML-2.1 is included in the source tree and if these libraries aren't
-installed on the system, they'll need to be included on your libpath
-before attempting execution:
-
-export LD_LIBRARY_PATH=game/libs/SFML-2.1/lib

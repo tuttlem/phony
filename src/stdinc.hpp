@@ -4,10 +4,11 @@
 #define __phony_stdinc_hpp_
 
 extern "C" {
+/*
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
-
+*/
 #include <SDL.h>
 
 #include <GL/gl.h>
@@ -25,8 +26,14 @@ extern "C" {
 #include <algorithm>
 #include <chrono>
 #include <exception>
+#include <stdexcept>
+#include <vector>
+#include <sstream>
+#include <iterator>
 
 #include <glm/glm.hpp>
+
+#include <lua.hpp>
 
 #include "fwk/gstate.hpp"
 #include "fwk/gstatea.hpp"
@@ -35,6 +42,7 @@ extern "C" {
 #include "fwk/game.hpp"
 #include "fwk/tmgr.hpp"
 
+#include "util/strutil.hpp"
 #include "util/timer.hpp"
 #include "util/tweener.hpp"
 #include "util/camera.hpp"
@@ -42,5 +50,6 @@ extern "C" {
 #include "util/lscape.hpp"
 #include "util/prim.hpp"
 #include "util/tga.hpp"
+#include "util/luaconf.hpp"
 
 #endif //__phony_stdinc_hpp_

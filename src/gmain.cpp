@@ -85,8 +85,14 @@ int main(int argc, char *argv[]) {
 
    // create the game object
    phony::game g;
+   auto config = phony::lua_config::fromFile("data/config.lua");
 
-   g.init(640, 480, "Phony");
+   g.init(
+      config->getInt("window.width"),
+      config->getInt("window.height"),
+      config->getString("window.title")
+   );
+
    g.run(std::make_shared<blank_state>());
    g.teardown();
 

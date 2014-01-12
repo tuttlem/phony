@@ -31,6 +31,13 @@ class blank_state : public game_state {
          angle = 0.0f;
 
          texture_manager::instance()->loadTGA("test", "data/test.tga");
+         /*
+         if (!sound_manager::instance()->loadSoundFromWav("test", "data/test.wav")) {
+            std::cout << "failed to load sound" << std::endl;
+         }
+
+         sound_manager::instance()->playSound("test");
+         */
 
          return true;
       }

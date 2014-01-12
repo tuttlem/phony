@@ -86,33 +86,35 @@ namespace phony {
 
       this->_window = nullptr;
       this->_glContext = nullptr;
-      //this->_renderer = nullptr;
 
       if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
          throw std::runtime_error(SDL_GetError());
       }
 
-      return this->setupVideo();
+      this->setupVideo();
+      this->setupAudio();
+
+      return true;
    }
 
    const bool game::teardown(void) {
-      /*
-      if (this->_renderer != nullptr) {
-         SDL_DestroyRenderer(this->_renderer);
-         this->_renderer = NULL;
-      }
-      */
+
+      // teardown the audio mixer
+      // Mix_CloseAudio();
+
+      // teardown the window
       if (this->_window != nullptr) {
          SDL_DestroyWindow(this->_window);
          this->_window = nullptr;
       }
 
+      // get out of sdl
       SDL_Quit();
 
       return true;
    }
 
-   const bool game::setupVideo(void) {
+   void game::setupVideo(void) {
 
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
@@ -136,19 +138,15 @@ namespace phony {
 
       // use v-sync
       SDL_GL_SetSwapInterval(1);
+   }
 
-      /*
-      this->_renderer = SDL_CreateRenderer(
-         this->_window, -1,
-         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-      );
-
-      if (this->_renderer == nullptr) {
-         throw std::runtime_error(SDL_GetError());
+   void game::setupAudio(void) {
+/*
+      if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
+         throw std::runtime_error("Unable to open audio mixer");
       }
-      */
+*/
 
-      return true;
    }
 
 }

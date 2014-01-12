@@ -6,13 +6,8 @@
 namespace phony {
 
    /** Centralises texture management for the application */
-   class texture_manager {
+   class texture_manager : public singleton_manager<texture_manager> {
       public:
-         texture_manager(void);
-         virtual ~texture_manager(void);
-
-         static std::shared_ptr<texture_manager> instance(void);
-
          /** Loads a texture from tga file into the manager */
          const bool loadTGA(const std::string &key, const std::string &filename);
 
@@ -22,8 +17,6 @@ namespace phony {
          void clear(void);
 
       private:
-         static std::shared_ptr<texture_manager> _instance;
-
          std::map<std::string, GLuint> _textures;
    };
 

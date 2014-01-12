@@ -23,7 +23,9 @@ namespace phony {
          const bool running(void) const { return _running; }
 
       private:
-         const bool setupVideo(void);
+         void setupVideo(void);
+         void setupAudio(void);
+
          void setFramerate(const int fps);
 
          bool        _running;

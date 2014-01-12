@@ -3,24 +3,6 @@
 
 namespace phony {
 
-   std::shared_ptr<texture_manager> texture_manager::_instance(nullptr);
-
-
-   texture_manager::texture_manager(void) {
-   }
-
-   texture_manager::~texture_manager(void) {
-      this->clear();
-   }
-
-   std::shared_ptr<texture_manager> texture_manager::instance(void) {
-      if (texture_manager::_instance == nullptr) {
-         texture_manager::_instance = std::make_shared<texture_manager>();
-      }
-
-      return _instance;
-   }
-
    /** Loads a texture from tga file into the manager */
    const bool texture_manager::loadTGA(const std::string &key, const std::string &filename) {
       if (_textures.find(key) != _textures.end()) {

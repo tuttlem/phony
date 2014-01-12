@@ -5,6 +5,7 @@
 
 extern "C" {
 #include <SDL.h>
+#include <SDL_mixer.h>
 
 #include <GL/gl.h>
 #include <GL/glu.h>

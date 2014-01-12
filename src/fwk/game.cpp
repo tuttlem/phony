@@ -100,7 +100,7 @@ namespace phony {
    const bool game::teardown(void) {
 
       // teardown the audio mixer
-      // Mix_CloseAudio();
+      Mix_CloseAudio();
 
       // teardown the window
       if (this->_window != nullptr) {
@@ -109,6 +109,7 @@ namespace phony {
       }
 
       // get out of sdl
+      Mix_Quit();
       SDL_Quit();
 
       return true;
@@ -141,12 +142,9 @@ namespace phony {
    }
 
    void game::setupAudio(void) {
-/*
       if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
          throw std::runtime_error("Unable to open audio mixer");
       }
-*/
-
    }
 
 }

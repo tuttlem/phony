@@ -8,4 +8,8 @@ Dependencies:
 
    lua-5.2.1 (provided in the source tree)
    libsdl2-dev
+   libsdl2-image-dev
+   libsdl2-mixer-dev
+   libsdl2-net-dev
+
 

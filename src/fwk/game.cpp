@@ -8,6 +8,8 @@ namespace phony {
       // manages the current game time
       timer gameTimer;
 
+      this->setFramerate(30);
+
       this->_stateManager.setState(initialState);
       this->_stateManager.resize(this->_width, this->_height);
 
@@ -62,6 +64,16 @@ namespace phony {
                   break;
             }
 
+         }
+
+         // get the elapsed ms
+         unsigned int elapsed = gameTimer.elapsed();
+
+         // check if we have time to wait
+         if (elapsed < this->_targetMs) {
+            // burn what ever ms remains to stablise the framerate
+            unsigned int diff = this->_targetMs - elapsed;
+            std::this_thread::sleep_for(std::chrono::milliseconds(diff));
          }
 
          // update logic for the state
@@ -147,4 +159,7 @@ namespace phony {
       }
    }
 
+   void game::setFramerate(const int fps) {
+      this->_targetMs = 1000 / fps;
+   }
 }

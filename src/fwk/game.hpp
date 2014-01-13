@@ -28,14 +28,14 @@ namespace phony {
 
          void setFramerate(const int fps);
 
-         bool        _running;
-         int         _width, _height;
-         std::string _title;
+         bool           _running;
+         int            _width, _height;
+         unsigned int   _targetMs;
+         std::string    _title;
 
-         state_manager _stateManager;
+         state_manager  _stateManager;
 
          SDL_Window     *_window;
-         //SDL_Renderer   *_renderer;
          SDL_GLContext   _glContext;
    };
 

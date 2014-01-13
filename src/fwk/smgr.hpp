@@ -32,8 +32,8 @@ namespace phony {
    /** Centralises sound and music management for the application */
    class sound_manager : public singleton_manager<sound_manager> {
       public:
-         const bool loadSoundFromWav(const std::string &key, const std::string &filename);
-         const bool loadMusicFromWav(const std::string &key, const std::string &filename);
+         const bool loadSoundFromWAV(const std::string &key, const std::string &filename);
+         const bool loadMusicFromWAV(const std::string &key, const std::string &filename);
 
          void toggleMusic(void);
          void stopMusic(void);
@@ -46,8 +46,8 @@ namespace phony {
          virtual void clear(void);
 
       private:
-         std::map<std::string, sound_effect> _sounds;
-         std::map<std::string, music_piece> _musics;
+         std::map<std::string, std::unique_ptr<sound_effect>> _sounds;
+         std::map<std::string, std::unique_ptr<music_piece>> _musics;
    };
 
    inline sound_effect::sound_effect(void) : _chunk(nullptr) { }

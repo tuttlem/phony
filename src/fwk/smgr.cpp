@@ -17,7 +17,7 @@ namespace phony {
       }
    }
 
-   const bool sound_manager::loadSoundFromWav(const std::string &key, const std::string &filename) {
+   const bool sound_manager::loadSoundFromWAV(const std::string &key, const std::string &filename) {
       if (_sounds.find(key) != _sounds.end()) {
          return false;
       }
@@ -28,11 +28,11 @@ namespace phony {
          return false;
       }
 
-      _sounds[key] = sound_effect(chunk);
+      _sounds[key] = std::unique_ptr<sound_effect>(new sound_effect(chunk));
       return true;
    }
 
-   const bool sound_manager::loadMusicFromWav(const std::string &key, const std::string &filename) {
+   const bool sound_manager::loadMusicFromWAV(const std::string &key, const std::string &filename) {
       if (_musics.find(key) != _musics.end()) {
          return false;
       }
@@ -43,7 +43,7 @@ namespace phony {
          return false;
       }
 
-      _musics[key] = music_piece(music);
+      _musics[key] = std::unique_ptr<music_piece>(new music_piece(music));
       return true;
    }
 
@@ -64,11 +64,11 @@ namespace phony {
    }
 
    void sound_manager::playSound(const std::string &key) {
-      Mix_PlayChannel(-1, _sounds[key].chunk(), 0);
+      Mix_PlayChannel(-1, _sounds[key]->chunk(), 0);
    }
 
    void sound_manager::playMusic(const std::string &key) {
-      Mix_PlayMusic(_musics[key].music(), -1);
+      Mix_PlayMusic(_musics[key]->music(), -1);
    }
 
    /** Removes and destroys all sounds from the store */

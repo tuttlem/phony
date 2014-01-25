@@ -8,13 +8,13 @@ namespace phony {
    class perlin {
       private:
          static float noise(const int x, const int y);
-         static float smoothNoise(const float x, const float y);
+         static float smooth_noise(const float x, const float y);
          static float lerp(float a, float b, float x);
          static float terp(float a, float b, float x);
-         static float interpolateNoise(const float x, const float y);
+         static float interpolate_noise(const float x, const float y);
 
       public:
-         static float perlin2d(const float x, const float y,
+         static float perlin_2d(const float x, const float y,
                const int octaves = 6, const float persistence = 0.95f);
 
    };
@@ -25,7 +25,7 @@ namespace phony {
       return (1.0f - ( ( n * (n * n * 15731 + 789221) + 1376312589) & 0x7FFFFFFF) / 1073741824.0f);
    }
 
-   inline float perlin::smoothNoise(const float x, const float y) {
+   inline float perlin::smooth_noise(const float x, const float y) {
       int ix = (int)x;
       int iy = (int)y;
 
@@ -48,17 +48,17 @@ namespace phony {
       return a * (1 - x) + b * x;
    }
 
-   inline float perlin::interpolateNoise(const float x, const float y) {
+   inline float perlin::interpolate_noise(const float x, const float y) {
       int   ix = (int)x;
       float fx = x - ix;
 
       int   iy = (int)y;
       float fy = y - iy;
 
-      float v1 = smoothNoise(ix, iy),
-            v2 = smoothNoise(ix + 1, iy),
-            v3 = smoothNoise(ix, iy + 1),
-            v4 = smoothNoise(ix + 1, iy + 1);
+      float v1 = smooth_noise(ix, iy),
+            v2 = smooth_noise(ix + 1, iy),
+            v3 = smooth_noise(ix, iy + 1),
+            v4 = smooth_noise(ix + 1, iy + 1);
 
       float i1 = terp(v1, v2, fx),
             i2 = terp(v3, v4, fx);

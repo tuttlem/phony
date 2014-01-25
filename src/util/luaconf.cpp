@@ -11,7 +11,7 @@ namespace phony {
       lua_close(this->_state);
    }
 
-   std::shared_ptr<lua_config> lua_config::fromFile(const std::string &filename) {
+   std::shared_ptr<lua_config> lua_config::from_file(const std::string &filename) {
       auto config = std::make_shared<lua_config>();
 
       if ((luaL_dofile(config->_state, filename.c_str())) != 0) {
@@ -22,7 +22,7 @@ namespace phony {
    }
 
    template<typename T>
-   T lua_config::getValue(const std::string &name, const std::function<T()> &getter) {
+   T lua_config::get_value(const std::string &name, const std::function<T()> &getter) {
       std::vector<std::string> items = strutil::split(name, '.');
       int length = items.size();
 
@@ -41,36 +41,36 @@ namespace phony {
       return value;
    }
 
-   const int lua_config::getInt(const std::string &name) {
+   const int lua_config::get_int(const std::string &name) {
       std::function<int()> fn = [&]() {
          return (int)lua_tointeger(this->_state, -1);
       };
 
-      return getValue(name, fn);
+      return get_value(name, fn);
    }
 
-   const double lua_config::getDouble(const std::string &name) {
+   const double lua_config::get_double(const std::string &name) {
       std::function<double()> fn = [&]() {
          return (double)lua_tonumber(this->_state, -1);
       };
 
-      return getValue(name, fn);
+      return get_value(name, fn);
    }
 
-   const bool lua_config::getBool(const std::string &name) {
+   const bool lua_config::get_bool(const std::string &name) {
       std::function<bool()> fn = [&]() {
          return (bool)lua_toboolean(this->_state, -1);
       };
 
-      return getValue(name, fn);
+      return get_value(name, fn);
    }
 
-   const std::string lua_config::getString(const std::string &name) {
+   const std::string lua_config::get_string(const std::string &name) {
       std::function<std::string()> fn = [&]() {
          return std::string(lua_tostring(this->_state, -1));
       };
 
-      return getValue(name, fn);
+      return get_value(name, fn);
    }
 
 }

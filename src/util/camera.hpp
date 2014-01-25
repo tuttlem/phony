@@ -7,35 +7,35 @@ namespace phony {
 
    class camera {
       private:
-         glm::vec3 viewDir,
-            rightVector,
-            upVector,
-            position;
+         glm::vec3 _view_dir,
+            _right_vector,
+            _up_vector,
+            _position;
 
-         float rotatedX,
-               rotatedY,
-               rotatedZ;
+         float _rotated_x,
+               _rotated_y,
+               _rotated_z;
 
       public:
          camera(void);
 
-         // positions the camera by transforming the scene
+         // _positions the camera by transforming the scene
          void place(void);
 
          void move(const glm::vec3 &dir);
-         void moveTo(const glm::vec3 &pos);
+         void move_to(const glm::vec3 &pos);
 
          // x rotation
          void pitch(const float angle);
-         void pitchTo(const float angle);
+         void pitch_to(const float angle);
 
          // y rotation
          void yaw(const float angle);
-         void yawTo(const float angle);
+         void yaw_to(const float angle);
 
          // z rotation
          void roll(const float angle);
-         void rollTo(const float angle);
+         void roll_to(const float angle);
 
          // z movement
          void advance(const float distance);
@@ -44,18 +44,18 @@ namespace phony {
          // x movement
          void strafe(const float distance);
 
-         const glm::vec3& pos(void) const { return position; }
+         const glm::vec3& pos(void) const { return _position; }
 
          void print(void);
 
       private:
-         void pitchInternal(void);
-         void yawInternal(void);
-         void rollInternal(void);
+         void pitch_internal(void);
+         void yaw_internal(void);
+         void roll_internal(void);
 
-         static const glm::vec3 viewInitial;
-         static const glm::vec3 upInitial;
-         static const glm::vec3 rightInitial;
+         static const glm::vec3 _view_initial;
+         static const glm::vec3 _up_initial;
+         static const glm::vec3 _right_initial;
    };
 
 }

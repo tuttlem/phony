@@ -22,7 +22,7 @@ namespace phony {
    class texture_manager : public singleton_manager<texture_manager> {
       public:
          /** Loads a texture from tga file into the manager */
-         const bool loadTGA(const std::string &key, const std::string &filename);
+         const bool load_tga(const std::string &key, const std::string &filename);
 
          void use(const std::string &key);
 

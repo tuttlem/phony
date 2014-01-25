@@ -10,7 +10,7 @@ namespace phony {
    tga::~tga(void) {
    }
 
-   std::shared_ptr<tga> tga::fromFile(const std::string &filename) {
+   std::shared_ptr<tga> tga::from_file(const std::string &filename) {
 
       // open the tga file
       std::ifstream tgaFile(filename, std::ios::binary | std::ios::in);
@@ -50,21 +50,21 @@ namespace phony {
       }
 
       if (t->_bpp == 24) {
-         t->_glType = GL_BGR;
+         t->_gl_type = GL_BGR;
       } else {
-         t->_glType = GL_BGRA;
+         t->_gl_type = GL_BGRA;
       }
 
-      t->_imageSize = t->bytesPerPixel() * t->_width * t->_height;
+      t->_image_size = t->bytes_per_pixel() * t->_width * t->_height;
       t->_data = std::unique_ptr<unsigned char[]>(
-         new unsigned char[t->_imageSize]
+         new unsigned char[t->_image_size]
       );
 
       // check if it's an uncompressed or compressed tga
       if (memcmp(uncompHeader, header, 12) == 0) {
-         tga::loadUncompressed(tgaFile, t);
+         tga::load_uncompressed(tgaFile, t);
       } else if (memcmp(compHeader, header, 12) == 0) {
-         tga::loadCompressed(tgaFile, t);
+         tga::load_compressed(tgaFile, t);
       } else {
          throw std::runtime_error("An invalid TGA header was encountered");
       }
@@ -75,10 +75,10 @@ namespace phony {
       return t;
    }
 
-   void tga::loadUncompressed(std::ifstream &f, std::shared_ptr<tga> t) {
+   void tga::load_uncompressed(std::ifstream &f, std::shared_ptr<tga> t) {
 
       // read the image data now
-      f.read((char *)t->_data.get(), t->_imageSize);
+      f.read((char *)t->_data.get(), t->_image_size);
 
       if (!f) {
          throw std::runtime_error("Not enough TGA data was available");
@@ -86,12 +86,12 @@ namespace phony {
 
    }
 
-   void tga::loadCompressed(std::ifstream &f, std::shared_ptr<tga> t) {
+   void tga::load_compressed(std::ifstream &f, std::shared_ptr<tga> t) {
 
       unsigned int currentByte = 0;
 
       auto colourBuffer = std::unique_ptr<unsigned char>(
-         new unsigned char[t->bytesPerPixel()]
+         new unsigned char[t->bytes_per_pixel()]
       );
 
       do {
@@ -105,7 +105,7 @@ namespace phony {
             // raw pixels
             chunkHeader ++;
 
-            unsigned int bytes = chunkHeader * t->bytesPerPixel();
+            unsigned int bytes = chunkHeader * t->bytes_per_pixel();
 
             // read out the pixels
             f.read((char *)&t->_data.get()[currentByte], bytes);
@@ -117,22 +117,22 @@ namespace phony {
             chunkHeader -= 127;
 
             // read the next pixel
-            f.read((char *)colourBuffer.get(), t->bytesPerPixel());
+            f.read((char *)colourBuffer.get(), t->bytes_per_pixel());
 
             // set the pixels
             for (int index = 0; index < chunkHeader; index ++) {
-               for (unsigned int b = 0; b < t->bytesPerPixel(); b ++) {
+               for (unsigned int b = 0; b < t->bytes_per_pixel(); b ++) {
                   t->_data.get()[currentByte] = colourBuffer.get()[b];
                   currentByte ++;
                }
             }
          }
 
-      } while (currentByte < t->_imageSize);
+      } while (currentByte < t->_image_size);
 
    }
 
-   const GLuint tga::makeTexture(void) {
+   const GLuint tga::make_texture(void) {
 
       GLuint textureId;
       glGenTextures(1, &textureId);
@@ -141,7 +141,7 @@ namespace phony {
       glTexImage2D(
          GL_TEXTURE_2D, 0,
          GL_RGB, this->_width, this->_height, 0,
-         this->_glType, GL_UNSIGNED_BYTE, this->_data.get()
+         this->_gl_type, GL_UNSIGNED_BYTE, this->_data.get()
       );
 
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

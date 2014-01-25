@@ -7,12 +7,12 @@ namespace phony {
 
       // define the function to run
       auto func = std::bind(
-         &game_state_async::updateInternal,
+         &game_state_async::update_internal,
          this
       );
 
       // run the thread off here
-      this->updater = std::async(
+      this->_updater = std::async(
          std::launch::async,
          func
       );
@@ -26,7 +26,7 @@ namespace phony {
    }
 
    const bool game_state_async::update(const unsigned int elapsed) {
-      return this->updater.wait_for(std::chrono::seconds(0)) != std::future_status::ready;
+      return this->_updater.wait_for(std::chrono::seconds(0)) != std::future_status::ready;
    }
 
 }

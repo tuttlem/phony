@@ -6,7 +6,7 @@ using namespace phony;
 class blank_state : public game_state {
    public:
       blank_state() {
-         keypressed = false;
+         pressed = false;
       }
 
       const bool init() {
@@ -30,7 +30,7 @@ class blank_state : public game_state {
 
          angle = 0.0f;
 
-         texture_manager::instance()->loadTGA("test", "data/test.tga");
+         texture_manager::instance()->load_tga("test", "data/test.tga");
 
          return true;
       }
@@ -63,20 +63,20 @@ class blank_state : public game_state {
       const bool update(const unsigned int elapsed) {
          float perc = elapsed / 1000.0f;
          angle += (perc * 10.0f) * (2.0f * 3.14159f);
-         return !keypressed;
+         return !pressed;
       }
 
-      void keyPressed(const SDL_Event &key) {
-         keypressed = true;
+      void key_pressed(const SDL_Event &key) {
+         pressed = true;
       }
 
       void resize(const int width, const int height) {
          std::cout << "resized to " << width << ", " << height << std::endl;
-         game_state::resize3D(width, height);
+         game_state::resize_3d(width, height);
       }
 
    private:
-      bool keypressed;
+      bool pressed;
       float angle;
       GLuint textureId;
 };
@@ -85,12 +85,12 @@ int main(int argc, char *argv[]) {
 
    // create the game object
    phony::game g;
-   auto config = phony::lua_config::fromFile("data/config.lua");
+   auto config = phony::lua_config::from_file("data/config.lua");
 
    g.init(
-      config->getInt("window.width"),
-      config->getInt("window.height"),
-      config->getString("window.title")
+      config->get_int("window.width"),
+      config->get_int("window.height"),
+      config->get_string("window.title")
    );
 
    g.run(std::make_shared<blank_state>());

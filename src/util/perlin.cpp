@@ -11,7 +11,7 @@ namespace phony {
    }
 
 
-   float perlin::perlin2d(const float x, const float y,
+   float perlin::perlin_2d(const float x, const float y,
          const int octaves, const float persistence) {
       float total = 0.0f;
 
@@ -19,7 +19,7 @@ namespace phony {
          float frequency = powf(2, i);
          float amplitude = powf(persistence, i);
 
-         total = total + interpolateNoise(x * frequency, y * frequency) * amplitude;
+         total = total + interpolate_noise(x * frequency, y * frequency) * amplitude;
       }
 
       return total;

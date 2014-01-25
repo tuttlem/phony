@@ -17,7 +17,7 @@ namespace phony {
       }
    }
 
-   const bool sound_manager::loadSoundFromWAV(const std::string &key, const std::string &filename) {
+   const bool sound_manager::load_sound_from_wav(const std::string &key, const std::string &filename) {
       if (_sounds.find(key) != _sounds.end()) {
          return false;
       }
@@ -32,7 +32,7 @@ namespace phony {
       return true;
    }
 
-   const bool sound_manager::loadMusicFromWAV(const std::string &key, const std::string &filename) {
+   const bool sound_manager::load_music_from_wav(const std::string &key, const std::string &filename) {
       if (_musics.find(key) != _musics.end()) {
          return false;
       }
@@ -47,27 +47,27 @@ namespace phony {
       return true;
    }
 
-   void sound_manager::toggleMusic(void) {
-      if (musicPlaying()) {
+   void sound_manager::toggle_music(void) {
+      if (music_playing()) {
          Mix_PauseMusic();
       } else {
          Mix_ResumeMusic();
       }
    }
 
-   void sound_manager::stopMusic(void) {
+   void sound_manager::stop_music(void) {
       Mix_HaltMusic();
    }
 
-   const bool sound_manager::musicPlaying(void) {
+   const bool sound_manager::music_playing(void) {
       return (bool)Mix_PausedMusic() != 1;
    }
 
-   void sound_manager::playSound(const std::string &key) {
+   void sound_manager::play_sound(const std::string &key) {
       Mix_PlayChannel(-1, _sounds[key]->chunk(), 0);
    }
 
-   void sound_manager::playMusic(const std::string &key) {
+   void sound_manager::play_music(const std::string &key) {
       Mix_PlayMusic(_musics[key]->music(), -1);
    }
 

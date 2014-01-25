@@ -8,9 +8,9 @@ namespace phony {
       // manages the current game time
       timer gameTimer;
 
-      this->setFramerate(30);
+      this->set_framerate(30);
 
-      this->_stateManager.setState(initialState);
+      this->_stateManager.set_state(initialState);
       this->_stateManager.resize(this->_width, this->_height);
 
       this->_running = true;
@@ -40,27 +40,27 @@ namespace phony {
                   break;
 
                case SDL_KEYDOWN:
-                  this->_stateManager.keyPressed(event);
+                  this->_stateManager.key_pressed(event);
                   break;
 
                case SDL_KEYUP:
-                  this->_stateManager.keyReleased(event);
+                  this->_stateManager.key_released(event);
                   break;
 
                case SDL_MOUSEMOTION:
-                  this->_stateManager.mouseMoved(event);
+                  this->_stateManager.mouse_moved(event);
                   break;
 
                case SDL_MOUSEBUTTONDOWN:
-                  this->_stateManager.mousePressed(event);
+                  this->_stateManager.mouse_pressed(event);
                   break;
 
                case SDL_MOUSEBUTTONUP:
-                  this->_stateManager.mouseReleased(event);
+                  this->_stateManager.mouse_released(event);
                   break;
 
                default:
-                  this->_stateManager.raiseEvent(event);
+                  this->_stateManager.raise_event(event);
                   break;
             }
 
@@ -103,8 +103,8 @@ namespace phony {
          throw std::runtime_error(SDL_GetError());
       }
 
-      this->setupVideo();
-      this->setupAudio();
+      this->setup_video();
+      this->setup_audio();
 
       return true;
    }
@@ -127,7 +127,7 @@ namespace phony {
       return true;
    }
 
-   void game::setupVideo(void) {
+   void game::setup_video(void) {
 
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
@@ -153,13 +153,13 @@ namespace phony {
       SDL_GL_SetSwapInterval(1);
    }
 
-   void game::setupAudio(void) {
+   void game::setup_audio(void) {
       if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
          throw std::runtime_error("Unable to open audio mixer");
       }
    }
 
-   void game::setFramerate(const int fps) {
+   void game::set_framerate(const int fps) {
       this->_targetMs = 1000 / fps;
    }
 }

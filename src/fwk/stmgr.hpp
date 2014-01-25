@@ -12,63 +12,63 @@ namespace phony {
          state_manager(void);
          virtual ~state_manager(void);
 
-         void setState(std::shared_ptr<game_state> state);
-         void setErrorState(const std::string &message);
+         void set_state(std::shared_ptr<game_state> state);
+         void set_error_state(const std::string &message);
 
          void update(const unsigned int elapsed, const int width, const int height);
          void render(void);
-         void raiseEvent(const SDL_Event &event);
+         void raise_event(const SDL_Event &event);
 
-         const bool running(void) const { return this->_currentState != nullptr; }
+         const bool running(void) const { return this->_current_state != nullptr; }
 
-         void keyPressed(const SDL_Event &event);
-         void keyReleased(const SDL_Event &event);
-         void mouseMoved(const SDL_Event &event);
-         void mousePressed(const SDL_Event &event);
-         void mouseReleased(const SDL_Event &event);
+         void key_pressed(const SDL_Event &event);
+         void key_released(const SDL_Event &event);
+         void mouse_moved(const SDL_Event &event);
+         void mouse_pressed(const SDL_Event &event);
+         void mouse_released(const SDL_Event &event);
          void resize(const int width, const int height);
 
       private:
-         std::shared_ptr<game_state> _currentState;
+         std::shared_ptr<game_state> _current_state;
    };
 
    inline state_manager::state_manager(void) {
-      this->_currentState = nullptr;
+      this->_current_state = nullptr;
    }
 
    inline state_manager::~state_manager(void) {
    }
 
-   inline void state_manager::setErrorState(const std::string &message) {
-      this->_currentState = std::make_shared<error_state>(message);
+   inline void state_manager::set_error_state(const std::string &message) {
+      this->_current_state = std::make_shared<error_state>(message);
    }
 
-   inline void state_manager::setState(std::shared_ptr<game_state> state) {
+   inline void state_manager::set_state(std::shared_ptr<game_state> state) {
 
-      std::shared_ptr<game_state> old = this->_currentState;
+      std::shared_ptr<game_state> old = this->_current_state;
 
       // if we already have a state to set, tear it down
-      if (this->_currentState != nullptr) {
+      if (this->_current_state != nullptr) {
          try {
-            if (!this->_currentState->teardown()) {
-               this->setErrorState("Failed to teardown game state");
+            if (!this->_current_state->teardown()) {
+               this->set_error_state("Failed to teardown game state");
             }
          } catch (std::exception &e) {
-            this->setErrorState("Teardown failed: " + std::string(e.what()));
+            this->set_error_state("Teardown failed: " + std::string(e.what()));
          }
       }
 
       // change the state over
-      this->_currentState = state;
+      this->_current_state = state;
 
       // if we have a valid state, init it
-      if (this->_currentState != nullptr) {
+      if (this->_current_state != nullptr) {
          try {
-            if (!this->_currentState->init()) {
-               this->setErrorState("Failed to initialize game state");
+            if (!this->_current_state->init()) {
+               this->set_error_state("Failed to initialize game state");
             }
          } catch (std::exception &e) {
-            this->setErrorState("Init failed: " + std::string(e.what()));
+            this->set_error_state("Init failed: " + std::string(e.what()));
          }
       }
 
@@ -77,14 +77,14 @@ namespace phony {
    inline void state_manager::update(const unsigned int elapsed, const int width, const int height) {
 
       // make sure we have a state to work with
-      if (this->_currentState != nullptr) {
+      if (this->_current_state != nullptr) {
 
          // update the state
-         if (!this->_currentState->update(elapsed)) {
+         if (!this->_current_state->update(elapsed)) {
 
             // false, out the back-end of update means that
             // we're ready to move onto the next state
-            this->setState(this->_currentState->next());
+            this->set_state(this->_current_state->next());
 
             // start all state changes with a resize event
             this->resize(width, height);
@@ -92,7 +92,7 @@ namespace phony {
          } else {
 
             // render this state out now
-            this->_currentState->render();
+            this->_current_state->render();
 
          }
 
@@ -103,53 +103,53 @@ namespace phony {
    inline void state_manager::render(void) {
 
       // make sure that we have a valid state to work with
-      if (this->_currentState != nullptr) {
-         this->_currentState->render();
+      if (this->_current_state != nullptr) {
+         this->_current_state->render();
       }
    }
 
-   inline void state_manager::raiseEvent(const SDL_Event &event) {
+   inline void state_manager::raise_event(const SDL_Event &event) {
 
       // make sure we have a state to work with
-      if (this->_currentState != nullptr) {
-         this->_currentState->handleEvent(event);
+      if (this->_current_state != nullptr) {
+         this->_current_state->handle_event(event);
       }
 
    }
 
-   inline void state_manager::keyPressed(const SDL_Event &event) {
-      if (this->_currentState != nullptr) {
-         this->_currentState->keyPressed(event);
+   inline void state_manager::key_pressed(const SDL_Event &event) {
+      if (this->_current_state != nullptr) {
+         this->_current_state->key_pressed(event);
       }
    }
 
-   inline void state_manager::keyReleased(const SDL_Event &event) {
-      if (this->_currentState != nullptr) {
-         this->_currentState->keyReleased(event);
+   inline void state_manager::key_released(const SDL_Event &event) {
+      if (this->_current_state != nullptr) {
+         this->_current_state->key_released(event);
       }
    }
 
-   inline void state_manager::mouseMoved(const SDL_Event &event) {
-      if (this->_currentState != nullptr) {
-         this->_currentState->mouseMoved(event);
+   inline void state_manager::mouse_moved(const SDL_Event &event) {
+      if (this->_current_state != nullptr) {
+         this->_current_state->mouse_moved(event);
       }
    }
 
-   inline void state_manager::mousePressed(const SDL_Event &event) {
-      if (this->_currentState != nullptr) {
-         this->_currentState->mousePressed(event);
+   inline void state_manager::mouse_pressed(const SDL_Event &event) {
+      if (this->_current_state != nullptr) {
+         this->_current_state->mouse_pressed(event);
       }
    }
 
-   inline void state_manager::mouseReleased(const SDL_Event &event) {
-      if (this->_currentState != nullptr) {
-         this->_currentState->mouseReleased(event);
+   inline void state_manager::mouse_released(const SDL_Event &event) {
+      if (this->_current_state != nullptr) {
+         this->_current_state->mouse_released(event);
       }
    }
 
    inline void state_manager::resize(const int width, const int height) {
-      if (this->_currentState != nullptr) {
-         this->_currentState->resize(width, height);
+      if (this->_current_state != nullptr) {
+         this->_current_state->resize(width, height);
       }
    }
 }

@@ -14,10 +14,10 @@ namespace phony {
 
          const bool update(const unsigned int elapsed);
 
-         virtual bool updateInternal(void) = 0;
+         virtual bool update_internal(void) = 0;
 
       private:
-         std::future<bool> updater;
+         std::future<bool> _updater;
    };
 
 

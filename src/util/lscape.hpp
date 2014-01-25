@@ -13,33 +13,33 @@ namespace phony {
          landscape(const int w, const int h);
          ~landscape(void);
 
-         void renderLines(void);
-         void renderPolys(void);
+         void render_lines(void);
+         void render_quads(void);
 
-         const float getHeight(const int x, const int y);
+         const float get_height(const int x, const int y);
       private:
-         void setColour(const int x, const int y);
+         void set_colour(const int x, const int y);
          void render(GLenum mode);
 
       private:
-         int            width, height; /* width and height of the map */
-         int            step;          /* step to process the map at */
-         float          *map;          /* the map data */
+         int            _width, _height; /* width and height of the map */
+         int            _step;          /* step to process the map at */
+         float          *_map;          /* the map data */
    };
 
-   inline void landscape::renderLines(void) {
+   inline void landscape::render_lines(void) {
       this->render(GL_LINES);
    }
 
-   inline void landscape::renderPolys(void) {
+   inline void landscape::render_quads(void) {
       this->render(GL_QUADS);
    }
 
-   inline const float landscape::getHeight(const int x, const int y) {
-      int xx = x % this->width;
-      int yy = y % this->height;
+   inline const float landscape::get_height(const int x, const int y) {
+      int xx = x % this->_width;
+      int yy = y % this->_height;
 
-      return map[xx + (yy * width)] * 5.0f;
+      return _map[xx + (yy * _width)] * 5.0f;
    }
 
 }

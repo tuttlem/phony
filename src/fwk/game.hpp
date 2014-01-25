@@ -15,18 +15,18 @@ namespace phony {
          void run(std::shared_ptr<game_state> initialState);
          const bool teardown(void);
 
-         void setupFor2D(void);
-         void setupFor3D(void);
+         void setup_for_2d(void);
+         void setup_for_3d(void);
 
          const int width(void) const    { return _width; }
          const int height(void) const   { return _height; }
          const bool running(void) const { return _running; }
 
       private:
-         void setupVideo(void);
-         void setupAudio(void);
+         void setup_video(void);
+         void setup_audio(void);
 
-         void setFramerate(const int fps);
+         void set_framerate(const int fps);
 
          bool           _running;
          int            _width, _height;

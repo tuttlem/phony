@@ -10,16 +10,16 @@ namespace phony {
          lua_config(void);
          virtual ~lua_config(void);
 
-         static std::shared_ptr<lua_config> fromFile(const std::string &filename);
+         static std::shared_ptr<lua_config> from_file(const std::string &filename);
 
-         const int getInt(const std::string &name);
-         const double getDouble(const std::string &name);
-         const bool getBool(const std::string &name);
-         const std::string getString(const std::string &name);
+         const int get_int(const std::string &name);
+         const double get_double(const std::string &name);
+         const bool get_bool(const std::string &name);
+         const std::string get_string(const std::string &name);
 
       private:
          template<typename T>
-         T getValue(const std::string &name, const std::function<T()> &getter);
+         T get_value(const std::string &name, const std::function<T()> &getter);
 
          lua_State   *_state;
    };

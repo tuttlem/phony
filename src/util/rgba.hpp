@@ -22,7 +22,7 @@ namespace phony {
          const float a(void) const { return _c[3]; }
          const float* c(void) const { return _c; }
 
-         void setGL(void);
+         void set_gl(void);
 
       private:
          float _c[4];

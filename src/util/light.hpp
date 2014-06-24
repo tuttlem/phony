@@ -25,7 +25,7 @@ namespace phony {
 
          void enable();
          void disable();
-         void set();
+         void set(unsigned short f = 0);
 
          void dirty(unsigned short f) {
             this->_dirtyFlags |= f;
@@ -36,36 +36,36 @@ namespace phony {
          const rgba specular(void) const { return _specular; }
 
          const glm::vec4 position(void) const { return _position; }
-         const glm::vec3 spotDirection(void) const { return _spotDirection; }
+         const glm::vec3 spot_direction(void) const { return _spot_direction; }
 
-         const float spotCutoff(void) const { return _spotCutoff; }
-         const float spotExponent(void) const { return _spotExponent; }
-         const float constantAttenuation(void) const { return _constantAttenuation; }
-         const float linearAttenuation(void) const { return _linearAttenuation; }
-         const float quadraticAttenuation(void) const { return _quadraticAttenuation; }
+         const float spot_cutoff(void) const { return _spot_cutoff; }
+         const float spot_exponent(void) const { return _spot_exponent; }
+         const float constant_attenuation(void) const { return _constant_attenuation; }
+         const float linear_attenuation(void) const { return _linear_attenuation; }
+         const float quadratic_attenuation(void) const { return _quadratic_attenuation; }
 
          void ambient(const rgba &a) { this->dirty(L_DIRTY_AMBIENT); this->_ambient = a; }
          void diffuse(const rgba &d) { this->dirty(L_DIRTY_DIFFUSE); this->_diffuse = d; }
          void specular(const rgba &s) { this->dirty(L_DIRTY_SPECULAR); this->_specular = s; }
          void position(const glm::vec4 &p) { this->dirty(L_DIRTY_POSITION); this->_position = p; }
-         void spotDirection(const glm::vec3 &d) { this->dirty(L_DIRTY_SPOTDIR); this->_spotDirection = d; }
-         void spotCutoff(const float c) { this->dirty(L_DIRTY_SPOTCUT); this->_spotCutoff = c; }
-         void spotExponent(const float e) { this->dirty(L_DIRTY_SPOTEXP); this->_spotExponent = e; }
-         void constantAttenuation(const float a) { this->dirty(L_DIRTY_CONSATT); this->_constantAttenuation = a; }
-         void linearAttenuation(const float a) { this->dirty(L_DIRTY_LINATT); this->_linearAttenuation = a; }
-         void quadraticAttenuation(const float a) { this->dirty(L_DIRTY_QUADATT); this->_quadraticAttenuation = a; }
+         void spot_direction(const glm::vec3 &d) { this->dirty(L_DIRTY_SPOTDIR); this->_spot_direction = d; }
+         void spot_cutoff(const float c) { this->dirty(L_DIRTY_SPOTCUT); this->_spot_cutoff = c; }
+         void spot_exponent(const float e) { this->dirty(L_DIRTY_SPOTEXP); this->_spot_exponent = e; }
+         void constant_attenuation(const float a) { this->dirty(L_DIRTY_CONSATT); this->_constant_attenuation = a; }
+         void linear_attenuation(const float a) { this->dirty(L_DIRTY_LINATT); this->_linear_attenuation = a; }
+         void quadratic_attenuation(const float a) { this->dirty(L_DIRTY_QUADATT); this->_quadratic_attenuation = a; }
 
 
       private:
          rgba _ambient, _diffuse, _specular;
          glm::vec4 _position;
-         glm::vec3 _spotDirection;
-         float _spotCutoff, _spotExponent;
-         float _constantAttenuation,
-               _linearAttenuation,
-               _quadraticAttenuation;
+         glm::vec3 _spot_direction;
+         float _spot_cutoff, _spot_exponent;
+         float _constant_attenuation,
+               _linear_attenuation,
+               _quadratic_attenuation;
 
-         GLuint _lightNumber;
+         GLuint _light_number;
 
          unsigned short _dirtyFlags;
    };

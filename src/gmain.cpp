@@ -5,7 +5,7 @@ using namespace phony;
 
 class blank_state : public game_state {
    public:
-      blank_state() {
+      blank_state() : light1(GL_LIGHT1) {
          pressed = false;
       }
 
@@ -17,15 +17,13 @@ class blank_state : public game_state {
          glDepthFunc(GL_LEQUAL);
          glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-         float ambientLight[]  = { 0.5f, 0.5f, 0.5f, 1.0f };
-         float diffuseLight[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
-         float lightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f };
+         light1.ambient(rgba(0.5f, 0.5f, 0.5f, 1.0f));
+         light1.diffuse(rgba(1.0f, 1.0f, 1.0f, 1.0f));
+         light1.position(glm::vec4(0.0f, 0.0f, 2.0f, 1.0f));
 
          glEnable(GL_LIGHTING);
-         glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
-         glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
-         glLightfv(GL_LIGHT1, GL_POSITION, lightPosition);
-         glEnable(GL_LIGHT1);
+         light1.enable();
+
          glEnable(GL_TEXTURE_2D);
 
          angle = 0.0f;
@@ -37,6 +35,8 @@ class blank_state : public game_state {
 
       const bool render() {
          glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+         light1.set();
 
          glMatrixMode(GL_MODELVIEW);
 
@@ -79,6 +79,7 @@ class blank_state : public game_state {
       bool pressed;
       float angle;
       GLuint textureId;
+      light light1;
 };
 
 int main(int argc, char *argv[]) {

@@ -3,7 +3,7 @@
 CC := g++
 SRCDIR := src
 BUILDDIR := build
-CFLAGS := -g -std=c++11 -Wall -Ilibs/lua-5.2.3/include `pkg-config --cflags sdl2 SDL2_mixer`
+CFLAGS := -g -std=c++11 -Wall -Ilibs/lua-5.2.3/include -Ilibs/glm `pkg-config --cflags sdl2 SDL2_mixer`
 TARGET := bin/phony
 LFLAGS := -Llibs/lua-5.2.3/lib/ `pkg-config --libs sdl2 SDL2_mixer` -lGL -lGLU -lpthread -llua -ldl
 

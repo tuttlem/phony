@@ -49,5 +49,8 @@ extern "C" {
 #include "util/prim.hpp"
 #include "util/tga.hpp"
 #include "util/luaconf.hpp"
+#include "util/rgba.hpp"
+#include "util/light.hpp"
+
 
 #endif //__phony_stdinc_hpp_

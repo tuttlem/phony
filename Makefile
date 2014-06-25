@@ -17,8 +17,8 @@ $(TARGET): $(OBJECTS)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
-	@mkdir -p $(BUILDDIR)/fwk
-	@mkdir -p $(BUILDDIR)/util
+	@mkdir -p $(BUILDDIR)/phony/util
+	@mkdir -p $(BUILDDIR)/phony/fwk
 	@echo " CC $<"; $(CC) $(CFLAGS) -MD -MF $(@:.o=.deps) -c -o $@ $<
 
 clean:

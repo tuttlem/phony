@@ -85,17 +85,16 @@ class blank_state : public game_state {
 int main(int argc, char *argv[]) {
 
    // create the game object
-   phony::game g;
    auto config = phony::lua_config::from_file("data/config.lua");
 
-   g.init(
+   phony_init(
       config->get_int("window.width"),
       config->get_int("window.height"),
       config->get_string("window.title")
    );
 
-   g.run(std::make_shared<blank_state>());
-   g.teardown();
+   phony_run(std::make_shared<blank_state>());
+   phony_teardown();
 
    return 0;
 }

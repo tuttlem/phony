@@ -5,48 +5,24 @@
 
 namespace phony {
 
-   /** Basic game flow control object */
-   class game {
-      public:
-         game(void);
-         virtual ~game(void);
+   extern bool    _running;
+   extern int     _width, _height;
+   extern SDL_Window     *_window;
+   extern SDL_GLContext   _gl_context;
 
-         const bool init(const int width, const int height, const std::string &title);
-         void run(std::shared_ptr<game_state> initialState);
-         const bool teardown(void);
+   const bool phony_init(const int width, const int height, const std::string &title);
+   void phony_run(std::shared_ptr<game_state> initial_state);
+   const bool phony_teardown(void);
 
-         void setup_for_2d(void);
-         void setup_for_3d(void);
+   void setup_for_2d(void);
+   void setup_for_3d(void);
 
-         const int width(void) const    { return _width; }
-         const int height(void) const   { return _height; }
-         const bool running(void) const { return _running; }
+   inline const int window_width(void) { return _width; }
+   inline const int window_height(void) { return _height; }
+   inline const bool game_running(void) { return _running; }
 
-      private:
-         void setup_video(void);
-         void setup_audio(void);
-
-         void set_framerate(const int fps);
-
-         bool           _running;
-         int            _width, _height;
-         unsigned int   _targetMs;
-         std::string    _title;
-
-         state_manager  _stateManager;
-
-         SDL_Window     *_window;
-         SDL_GLContext   _glContext;
-   };
-
-
-   inline game::game(void) {
-   }
-
-   inline game::~game(void) {
-      this->teardown();
-   }
-
+   inline SDL_Window* game_window(void) { return _window; }
+   inline SDL_GLContext gl_context(void) { return _gl_context; }
 }
 
 #endif //__phony_game_hpp_

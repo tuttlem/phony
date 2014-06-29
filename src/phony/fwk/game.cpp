@@ -94,7 +94,7 @@ namespace phony {
 
          // update logic for the state
          _state_manager.update(
-            game_timer.elapsed(),
+            elapsed,
             _width,
             _height
          );

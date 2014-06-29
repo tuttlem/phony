@@ -29,6 +29,7 @@ class blank_state : public game_state {
          angle = 0.0f;
 
          texture_manager::instance()->load_tga("test", "data/test.tga");
+         texture_manager::instance()->load_tga("test2", "data/brick3.tga");
 
          return true;
       }
@@ -49,6 +50,7 @@ class blank_state : public game_state {
             primitive::cube(1.0f);
          glEnd();
 
+         texture_manager::instance()->use("test2");
          glLoadIdentity();
          glTranslatef(0.0f, 0.0f, -5.0f);
          glRotatef(angle, 1.0f, 1.0f, 1.0f);

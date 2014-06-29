@@ -6,6 +6,7 @@
 extern "C" {
 #include <SDL.h>
 #include <SDL_mixer.h>
+#include <SDL_ttf.h>
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -31,6 +32,7 @@ extern "C" {
 
 #include <lua.hpp>
 
+#include "fwk/scene.hpp"
 #include "fwk/gstate.hpp"
 #include "fwk/gstatea.hpp"
 #include "fwk/estate.hpp"
@@ -51,6 +53,6 @@ extern "C" {
 #include "util/luaconf.hpp"
 #include "util/rgba.hpp"
 #include "util/light.hpp"
-
+#include "util/text.hpp"
 
 #endif //__phony_stdinc_hpp_

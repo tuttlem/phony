@@ -5,6 +5,7 @@ namespace phony {
 
    bool           _running;
    int            _width, _height;
+   unsigned int   _real_fps;
    unsigned int   _target_ms;
    std::string    _title;
 
@@ -18,8 +19,9 @@ namespace phony {
 
    void set_framerate(const int fps);
 
-
    void phony_run(std::shared_ptr<game_state> initial_state) {
+
+      unsigned int real_fps = 0, real_elapsed = 0;
 
       // manages the current game time
       timer game_timer;
@@ -85,6 +87,16 @@ namespace phony {
          // get the elapsed ms
          unsigned int elapsed = game_timer.elapsed();
 
+         real_elapsed += elapsed;
+         real_fps ++;
+
+         if (real_elapsed > 1000) {
+            _real_fps = real_fps;
+
+            real_fps = 0;
+            real_elapsed -= 1000;
+         }
+
          // check if we have time to wait
          if (elapsed < _target_ms) {
             // burn what ever ms remains to stablise the framerate
@@ -122,10 +134,16 @@ namespace phony {
       setup_video();
       setup_audio();
 
+      // setup TTF library
+      TTF_Init();
+
       return true;
    }
 
    const bool phony_teardown(void) {
+
+      // teardown the ttf library
+      TTF_Quit();
 
       // teardown the audio mixer
       Mix_CloseAudio();

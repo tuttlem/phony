@@ -25,13 +25,24 @@ class blank_state : public game_state {
          light1.enable();
 
          glEnable(GL_TEXTURE_2D);
+         glEnable(GL_BLEND);
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
          angle = 0.0f;
 
          texture_manager::instance()->load_tga("test", "data/test.tga");
          texture_manager::instance()->load_tga("test2", "data/brick3.tga");
 
-         return true;
+         if (!text::init("data/DejaVuSans.ttf", 28)) {
+            std::cout << "failed to load font" << std::endl;
+         }
+
+         return game_state::init();
+      }
+
+      const bool teardown() {
+         text::teardown();
+         return game_state::teardown();
       }
 
       const bool render() {
@@ -59,6 +70,12 @@ class blank_state : public game_state {
             primitive::cube(1.0f);
          glEnd();
 
+         text::print(
+            0.0f, 0.0f,
+            rgba(1.0f, 1.0f, 1.0f, 1.0f),
+            std::to_string(fps())
+         );
+
          return true;
       }
 
@@ -74,7 +91,7 @@ class blank_state : public game_state {
 
       void resize(const int width, const int height) {
          std::cout << "resized to " << width << ", " << height << std::endl;
-         game_state::resize_3d(width, height);
+         scene::resize_3d(width, height);
       }
 
    private:

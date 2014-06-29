@@ -27,10 +27,6 @@ namespace phony {
          virtual void resize(const int height, const int width);
 
          virtual std::shared_ptr<game_state> next(void);
-
-      protected:
-         static void resize_2d(const int width, const int height);
-         static void resize_3d(const int width, const int height, const float fovy = 45.0f, const float zNear = 0.1f, const float zFar = 1000.0f);
    };
 
    inline game_state::game_state(void) {

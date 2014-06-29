@@ -3,7 +3,7 @@
 
 namespace phony {
 
-   void game_state::resize_2d(const int width, const int height) {
+   void scene::resize_2d(const int width, const int height) {
 
       // setup the projection matrix
       glMatrixMode(GL_PROJECTION);
@@ -16,7 +16,10 @@ namespace phony {
 
    }
 
-   void game_state::resize_3d(const int width, const int height, const float fovy, const float zNear, const float zFar) {
+   void scene::resize_3d(
+      const int width, const int height,
+      const float fovy, const float zNear, const float zFar
+   ) {
 
       // setup the projection matrix
       glMatrixMode(GL_PROJECTION);
@@ -31,4 +34,3 @@ namespace phony {
    }
 
 }
-

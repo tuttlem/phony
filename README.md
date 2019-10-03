@@ -2,7 +2,7 @@
  
 A bootstrap project for getting game applications up and running, quickly.
 
-![Screenshot](https://github.com/tuttlem/phony/data/phony-screen.png)
+![Screenshot](https://github.com/tuttlem/phony/raw/master/data/phony-screen.png)
 
 ## Installation
 

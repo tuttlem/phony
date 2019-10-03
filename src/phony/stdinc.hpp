@@ -27,6 +27,7 @@ extern "C" {
 #include <vector>
 #include <sstream>
 #include <iterator>
+#include <functional>
 
 #include <glm/glm.hpp>
 

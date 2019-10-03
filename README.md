@@ -22,10 +22,10 @@ pacman -S lua sdl2_gfx sdl2_image sdl2_mixer sdl2_net sdl2_ttf
 
 ## Building
 
-You can now just build the source tree as usual:
+You can now just build the source tree. This has been converted into a [cmake](https://cmake.org/) project.
 
 ```
-make
+ccmake .
 ```
 
 You should be left with a binary, that built the test application. Run it from the project directory.

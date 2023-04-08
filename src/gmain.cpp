@@ -61,16 +61,34 @@ class blank_state : public game_state {
             primitive::cube(1.0f);
          glEnd();
 
-         texture_manager::instance()->use("test2");
-         glLoadIdentity();
-         glTranslatef(0.0f, 0.0f, -5.0f);
-         glRotatef(angle, 1.0f, 1.0f, 1.0f);
-         glTranslatef(0.0f, 0.0f, -2.0f);
-         glBegin(GL_QUADS);
-            primitive::cube(1.0f);
-         glEnd();
+          texture_manager::instance()->use("test2");
+          glLoadIdentity();
+          glTranslatef(0.0f, 0.0f, -5.0f);
+          glRotatef(angle, 1.0f, 1.0f, 1.0f);
+          glTranslatef(0.0f, 0.0f, -2.0f);
+          glBegin(GL_QUADS);
+          primitive::cube(1.0f);
+          glEnd();
 
-         text::print(
+          texture_manager::instance()->use("test");
+          glLoadIdentity();
+          glTranslatef(0.0f, 0.0f, -4.0f);
+          glRotatef(angle, 1.0f, 1.0f, 1.0f);
+          glTranslatef(0.0f, 0.0f, 2.0f);
+          glBegin(GL_QUADS);
+          primitive::cube(1.0f);
+          glEnd();
+
+          texture_manager::instance()->use("test2");
+          glLoadIdentity();
+          glTranslatef(0.0f, 0.0f, -3.0f);
+          glRotatef(angle, 1.0f, 1.0f, 1.0f);
+          glTranslatef(0.0f, 2.0f, 0.0f);
+          glBegin(GL_QUADS);
+          primitive::cube(1.0f);
+          glEnd();
+
+          text::print(
             0.0f, 0.0f,
             rgba(1.0f, 1.0f, 1.0f, 1.0f),
             std::to_string(fps())

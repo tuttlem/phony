@@ -28,6 +28,7 @@ extern "C" {
 #include <sstream>
 #include <iterator>
 #include <functional>
+#include <thread>
 
 #include <glm/glm.hpp>
 

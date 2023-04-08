@@ -14,6 +14,8 @@ include_directories(src/phony)
 include_directories(src/phony/fwk)
 include_directories(src/phony/util)
 
+file(COPY data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 add_executable(phony
         libs/glm/glm/detail/_features.hpp
         libs/glm/glm/detail/_fixes.hpp
